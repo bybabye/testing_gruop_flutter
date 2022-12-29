@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late double height;
   late double width;
-  int selectIndex = 4;
+  int selectIndex = 3;
   List<Widget> pages = [
     const Ptb1(),
     const Tamgiac(),
@@ -32,19 +32,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
-    width = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xFFE7EBEF),
       body: SizedBox(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: Padding(
                 padding: EdgeInsets.only(bottom: height * 0.12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     InkWell(
                       hoverColor: Colors.transparent,
@@ -112,8 +113,8 @@ class _HomePageState extends State<HomePage> {
             ),
             Center(
               child: Container(
-                height: height * 0.6,
-                width: width * 0.4,
+                height: height * 0.8,
+                width: width * 0.26,
                 decoration: BoxDecoration(
                   color: const Color(0xFFE7EBEF),
                   borderRadius: BorderRadius.circular(16),
