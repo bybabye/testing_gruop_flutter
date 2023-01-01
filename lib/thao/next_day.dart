@@ -65,4 +65,40 @@ class NextDay {
 
     return result;
   }
+
+  String dayOfWeek(int year, int day, int month) {
+    if (day < 1 || day > 31) return 'Ngày không hợp lệ';
+    if (month < 1 || month > 12) return 'Tháng không hợp lệ';
+    if (year < 1900) return 'Năm không hợp lệ';
+    // tao bien ket qua
+    //
+    String result = '';
+    int ngayhople =
+        ngayTrongThang(month, year); // kiem tra xem tinh hop le cua ngay
+    if (day > ngayhople) {
+      // 29/2/2003 > 28/2/2003 => khong hop le
+      return 'Ngày không hợp lệ';
+    }
+
+    year -= (14 - month) ~/ 12;
+    month += (12 * ((14 - month) ~/ 12) - 2);
+
+    // ignore: no_leading_underscores_for_local_identifiers
+    int _dayOfWeek = (day +
+            year +
+            (year ~/ 4) -
+            (year ~/ 100) +
+            (year ~/ 400) +
+            (31 * month) ~/ 12) %
+        7;
+
+    if (_dayOfWeek == 0) {
+      result = 'Chủ nhật';
+    } else {
+      _dayOfWeek++;
+      result = 'Thứ $_dayOfWeek';
+    }
+
+    return result;
+  }
 }

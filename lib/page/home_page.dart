@@ -1,9 +1,11 @@
 import 'package:app_test/components/circle_icon.dart';
+import 'package:app_test/huy/day_of_week_page.dart';
+import 'package:app_test/huy/tinhtuoi.dart';
+
 import 'package:app_test/minh/ptb1.dart';
 import 'package:app_test/minh/tamgiac.dart';
 import 'package:app_test/thao/ngay_tiep_theo.dart';
 import 'package:app_test/thao/pttb2.dart';
-import 'package:app_test/thao/tinhtuoi.dart';
 
 import 'package:flutter/material.dart';
 
@@ -17,13 +19,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late double height;
   late double width;
-  int selectIndex = 3;
+  int selectIndex = 0;
   List<Widget> pages = [
     const Ptb1(),
     const Tamgiac(),
     const NgayTiepTheo(),
     const Ptb2(),
     const TinhTuoi(),
+    const DayOfWeekPage(),
   ];
   //8890A7
 
@@ -104,6 +107,18 @@ class _HomePageState extends State<HomePage> {
                       onTap: () {
                         setState(() {
                           selectIndex = 4;
+                        });
+                      },
+                    ),
+                    InkWell(
+                      hoverColor: Colors.transparent,
+                      child: CircleIcon(
+                        text: 'Day of Week',
+                        isCheck: selectIndex == 5,
+                      ),
+                      onTap: () {
+                        setState(() {
+                          selectIndex = 5;
                         });
                       },
                     ),

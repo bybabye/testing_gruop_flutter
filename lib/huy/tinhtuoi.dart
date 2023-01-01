@@ -31,9 +31,11 @@ class _TinhTuoiState extends State<TinhTuoi> {
   String tinhTuoi(int year) {
     // year = 2000
     // khoi tao bien ket qua
-
     String result = '';
-
+    if (year < 1900) {
+      result = 'Năm bạn nhập không hợp lệ';
+      return result;
+    }
     // lay nam hien tai
     int yearNow = DateTime.now().year;
     if (yearNow < year) {
@@ -83,18 +85,10 @@ class _TinhTuoiState extends State<TinhTuoi> {
           ),
         CircleButton(
           func: () {
-            if (a.text.isEmpty) {
+            try {
+              result = tinhTuoi(int.parse(a.text));
+            } catch (e) {
               result = 'input invalid';
-            } else {
-              try {
-                if (int.parse(a.text) < 1900) {
-                  result = 'input invalid';
-                } else {
-                  result = tinhTuoi(int.parse(a.text));
-                }
-              } catch (e) {
-                result = 'input invalid';
-              }
             }
             setState(() {});
           },

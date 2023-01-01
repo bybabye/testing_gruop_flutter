@@ -27,22 +27,31 @@ class _TamgiacState extends State<Tamgiac> {
 
   String ketqua(double a, double b, double c) {
     String result = '';
+    double x = double.infinity; // max domain value or min domain value
+    double a2 = a * a; // x^2
+    double b2 = b * b;
+    double c2 = c * c;
+
     if (a < b + c && b < a + c && c < a + b) {
-      if (a * a == b * b + c * c ||
-          b * b == a * a + c * c ||
-          c * c == b * b + a * a) {
-        result =
-            'Đây là tam giác vuông'; //  pow(a,2) = pow(b,2) + pow(c,2) -> pytago
-      } else if (a == b && b == c) {
-        result = 'Đây là tam giác đều';
-      } else if (a == b || a == c || b == c) {
-        result = 'Đây là tam giác cân';
-      } else if (a * a > b * b + c * c ||
-          b * b > a * a + c * c ||
-          c * c > a * a + b * b) {
-        result = 'Đây là tam giác tù';
+      if (a2 == x ||
+          b2 == x ||
+          c2 == x ||
+          a2 + b2 == x ||
+          a2 + c2 == x ||
+          b2 + c2 == x) {
+        if (a == b && b == c) {
+          result = 'Đây là tam giác đều';
+        } else if (a == b || a == c || b == c) {
+          result = 'Đây là tam giác cân';
+        } else {
+          result = 'Đây là tam giác nhọn';
+        }
       } else {
-        result = 'Đây là tam giác nhọn';
+        if (a2 == b2 + c2 || b2 == a2 + c2 || c2 == b2 + a2) {
+          result = 'Đây là tam giác vuông';
+        } else {
+          result = 'Đây là tam giác tù';
+        }
       }
     } else {
       result = 'a,b,c không phải là tam giác';
@@ -104,7 +113,12 @@ class _TamgiacState extends State<Tamgiac> {
           ),
         CircleButton(
           func: () {
-            if (a.text.isEmpty || b.text.isEmpty || c.text.isEmpty) {
+            if (a.text.isEmpty ||
+                b.text.isEmpty ||
+                c.text.isEmpty ||
+                double.parse(a.text).isInfinite ||
+                double.parse(b.text).isInfinite ||
+                double.parse(c.text).isInfinite) {
               result = 'Input Invalid';
             } else {
               try {

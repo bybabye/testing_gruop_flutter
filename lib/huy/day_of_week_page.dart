@@ -1,47 +1,33 @@
 import 'package:app_test/components/circle_button.dart';
 import 'package:app_test/components/text_field_input.dart';
+import 'package:app_test/thao/next_day.dart';
 import 'package:app_test/theme/app_style.dart';
 import 'package:flutter/material.dart';
 
-class Ptb1 extends StatefulWidget {
-  const Ptb1({super.key});
+class DayOfWeekPage extends StatefulWidget {
+  const DayOfWeekPage({super.key});
 
   @override
-  State<Ptb1> createState() => _Ptb1State();
+  State<DayOfWeekPage> createState() => _DayOfWeekPageState();
 }
 
-class _Ptb1State extends State<Ptb1> {
+class _DayOfWeekPageState extends State<DayOfWeekPage> {
   String result = '';
-  bool isHover = false;
   late TextEditingController a;
-  late TextEditingController b;
-
+  late NextDay _nextDay;
+  bool isHover = false;
   @override
   void initState() {
     super.initState();
 
     a = TextEditingController();
-    b = TextEditingController();
+    _nextDay = NextDay();
   }
 
   @override
   void dispose() {
     super.dispose();
     a.dispose();
-    b.dispose();
-  }
-
-  String ketqua(double a, double b) {
-    String result;
-
-    if (a == 0) {
-      result = b == 0 ? 'phương trình vô số nghiệm' : 'phương trình vô nghiệm';
-    } else {
-      double nghiem = -b / a;
-      result = nghiem.toString();
-    }
-
-    return result;
   }
 
   @override
@@ -50,20 +36,16 @@ class _Ptb1State extends State<Ptb1> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         const Text(
-          'Giải phương trình bậc 1',
+          'Tính Thứ Ngày',
           style: AppStyles.h3,
         ),
         const Text(
-          'Phương trình có dạng : ax + b = 0',
+          'lưu ý : Nhập đúng theo như ví dụ : 12/09/2009',
           style: AppStyles.h5,
         ),
         TextFieldInput(
           controller: a,
-          hintText: 'Nhập a :',
-        ),
-        TextFieldInput(
-          controller: b,
-          hintText: 'Nhập b :',
+          hintText: 'Ex : 29/10/2000',
         ),
         if (result.isNotEmpty)
           Padding(
@@ -86,14 +68,17 @@ class _Ptb1State extends State<Ptb1> {
           ),
         CircleButton(
           func: () {
-            if (a.text.isEmpty ||
-                b.text.isEmpty ||
-                double.parse(a.text).isInfinite ||
-                double.parse(b.text).isInfinite) {
+            if (a.text.isEmpty) {
               result = 'input invalid';
             } else {
               try {
-                result = ketqua(double.parse(a.text), double.parse(b.text));
+                List<String> date = a.text.split('/');
+                if (date.length == 3) {
+                  result = _nextDay.dayOfWeek(int.parse(date[2]),
+                      int.parse(date[0]), int.parse(date[1]));
+                } else {
+                  result = 'input invalid';
+                }
               } catch (e) {
                 result = 'not number';
               }

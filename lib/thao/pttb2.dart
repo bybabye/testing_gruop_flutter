@@ -122,8 +122,18 @@ class _Ptb2State extends State<Ptb2> {
               result = 'Input Invalid';
             } else {
               try {
-                result = ptb2(double.parse(a.text), double.parse(b.text),
-                    double.parse(c.text));
+                double x = double.parse(a.text);
+                double y = double.parse(b.text);
+                double z = double.parse(c.text);
+                double delta = (y * y) * 4 * y * z;
+                if (x.isInfinite ||
+                    y.isInfinite ||
+                    z.isInfinite ||
+                    delta.isInfinite) {
+                  result = 'Math Error';
+                } else {
+                  result = ptb2(x, y, z);
+                }
               } catch (e) {
                 result = 'Input Invalid';
               }
