@@ -80,7 +80,7 @@ class _DayOfWeekPageState extends State<DayOfWeekPage> {
                   result = 'input invalid';
                 }
               } catch (e) {
-                result = 'not number';
+                result = 'Error';
               }
             }
             setState(() {});

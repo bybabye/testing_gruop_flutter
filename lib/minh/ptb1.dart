@@ -95,7 +95,7 @@ class _Ptb1State extends State<Ptb1> {
               try {
                 result = ketqua(double.parse(a.text), double.parse(b.text));
               } catch (e) {
-                result = 'not number';
+                result = 'Error';
               }
             }
             setState(() {});

@@ -80,7 +80,7 @@ class _NgayTiepTheoState extends State<NgayTiepTheo> {
                   result = 'input invalid';
                 }
               } catch (e) {
-                result = 'not number';
+                result = 'Error';
               }
             }
             setState(() {});
